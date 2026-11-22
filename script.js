@@ -76,6 +76,6 @@ noBtn.addEventListener("touchstart", () => {
   if (attempts >= texts.length) {
     noBtn.style.display = "none";
     noBtn.style.pointerEvents = "none";
-    question.textContent = "Error 404! no is not answer try yes 🫣"
+    question.textContent = "Error 404! no is not answer try yes"
   }
 });
