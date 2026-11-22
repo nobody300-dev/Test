@@ -1,0 +1,81 @@
+let attempts = 0;
+
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const question = document.getElementById("question");
+
+const texts = [
+  "Why are you like this? 😭",
+  "just a tiny time 💔",
+  "You know you want yes just try😏",
+  "I'm begging you now 🥺",
+  "I'm not going to stop until you say YES 😌",
+  "Last chance think a little bit!",
+  "Come ooooon 😩",
+  "Just one little yes 🥺👉👈",
+  "Error 404! no is not answer try yes 😌",
+];
+
+noBtn.addEventListener("mouseover", () => {
+  attempts++;
+
+  // Update text
+  question.textContent = texts[Math.min(attempts - 1, texts.length - 1)];
+
+  // Move button randomly and scale it (avoid overlapping YES button, constrained for mobile)
+  const x =
+    Math.random() > 0.5 ? Math.random() * 80 + 50 : -(Math.random() * 80 + 50);
+  const y =
+    Math.random() > 0.5 ? Math.random() * 80 + 50 : -(Math.random() * 80 + 50);
+  const noScale = Math.max(0.3, 1 - attempts * 0.15);
+  noBtn.style.transform = `translate(${x}px, ${y}px) scale(${noScale})`;
+
+  // Grow YES and ensure it stays on top
+  const yesScale = 1 + attempts * 0.15;
+  yesBtn.style.transform = `scale(${yesScale})`;
+  yesBtn.style.zIndex = "10";
+
+  // make NO disappear
+  if (attempts >= texts.length) {
+    noBtn.style.display = "none";
+    noBtn.style.pointerEvents = "none";
+    question.textContent = "Okay okay 😌 Just press YES ❤️";
+  }
+});
+
+yesBtn.addEventListener("click", () => {
+  document.body.innerHTML = `
+    <h1>Yayyyy 🥰💖</h1>
+    <p>You are amaizing screenshot this and send to me for auto date picked up for you </p>
+  `;
+});
+
+console.log(texts.length);
+
+// for mobile devices where hover is not possible
+noBtn.addEventListener("touchstart", () => {
+  attempts++;
+
+  // Update text
+  question.textContent = texts[Math.min(attempts - 1, texts.length - 1)];
+
+  // Move button randomly and scale it (avoid overlapping YES button, constrained for mobile)
+  const x =
+    Math.random() > 0.5 ? Math.random() * 80 + 50 : -(Math.random() * 80 + 50);
+  const y =
+    Math.random() > 0.5 ? Math.random() * 80 + 50 : -(Math.random() * 80 + 50);
+  const noScale = Math.max(0.3, 1 - attempts * 0.15);
+  noBtn.style.transform = `translate(${x}px, ${y}px) scale(${noScale})`;
+
+  // Grow YES and ensure it stays on top
+  const yesScale = 1 + attempts * 0.15;
+  yesBtn.style.transform = `scale(${yesScale})`;
+  yesBtn.style.zIndex = "10";
+
+  // Optional: make NO disappear
+  if (attempts >= texts.length) {
+    noBtn.style.display = "none";
+    noBtn.style.pointerEvents = "none";
+    question.textContent = "Error 404! no is not answer try yes 🫣"
+  }
+});
